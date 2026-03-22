@@ -1,0 +1,67 @@
+{
+  "name": "agent-skill-validator",
+  "version": "1.0.0",
+  "description": "Lint, validate, and test agent skill repos for OpenClaw, Claude Code, Codex, Gemini CLI, and HCS-26 ecosystems",
+  "main": "dist/index.js",
+  "bin": {
+    "agent-skill-validator": "dist/bin/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage",
+    "lint": "tsc --noEmit"
+  },
+  "files": [
+    "dist/",
+    "schemas/",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "agent-skills",
+    "github-actions",
+    "claude-code",
+    "openclaw",
+    "ci-cd",
+    "skill-validation",
+    "linting",
+    "developer-tools",
+    "ai-agents",
+    "codex"
+  ],
+  "author": "ollieb89",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ollieb89/agent-skill-validator"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.19.15",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/index.ts",
+      "!src/bin/cli.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 70
+      }
+    }
+  }
+}

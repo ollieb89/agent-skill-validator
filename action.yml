@@ -1,0 +1,47 @@
+name: 'agent-skill-validator'
+description: 'Lint, validate, and test agent skill repos for OpenClaw, Claude Code, Codex, Gemini CLI, and HCS-26 ecosystems'
+author: 'ollieb89'
+
+branding:
+  icon: 'check-square'
+  color: 'blue'
+
+inputs:
+  skill-path:
+    description: 'Path to the skill repo to validate'
+    required: false
+    default: '.'
+  ecosystem:
+    description: 'Target ecosystem: openclaw | claude-code | codex | gemini | auto'
+    required: false
+    default: 'auto'
+  strict:
+    description: 'Enable strict validation mode'
+    required: false
+    default: 'false'
+  fail-on:
+    description: 'When to fail: errors | warnings | none'
+    required: false
+    default: 'errors'
+  check-registry:
+    description: 'Run registry compatibility checks'
+    required: false
+    default: 'false'
+  registry:
+    description: 'Target registry: clawhub | hcs26 | none'
+    required: false
+    default: 'none'
+
+outputs:
+  valid:
+    description: 'Whether the skill passed all validation checks (true/false)'
+  errors:
+    description: 'Number of validation errors found'
+  warnings:
+    description: 'Number of validation warnings found'
+  publish-ready:
+    description: 'Whether the skill is ready to publish (true/false)'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

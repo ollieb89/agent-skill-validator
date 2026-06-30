@@ -16,7 +16,7 @@ The agent skill ecosystem is exploding — thousands of skills for OpenClaw, Cla
 - **SKILL.md Linting** — validates required fields (name, description, location, schema-version), detects placeholder text and broken links
 - **Schema Validation** — validates frontmatter against OpenClaw, HCS-26, and generic skill schemas
 - **Structure Checks** — verifies README, LICENSE, SKILL.md, examples/, and scans for leaked secrets
-- **Registry Compatibility** — validates against ClaweHub / HCS-26 registry publish requirements
+- **Registry Compatibility** — validates against ClawHub / HCS-26 registry publish requirements
 - **Multi-Ecosystem** — auto-detects OpenClaw, Claude Code, Codex, or Gemini CLI from repo structure
 - **Configurable Fail Policy** — `errors` / `warnings` / `none`
 - **PR Comment + Job Summary** — detailed breakdown in GitHub Actions
@@ -123,6 +123,7 @@ Overall: PASS
 | `name-placeholder` | Error | Name contains TODO/FIXME/TBD |
 | `description-placeholder` | Error | Description contains placeholder text |
 | `body-placeholder` | Warning | Body contains TODO/FIXME |
+| `action-approval-boundary-missing` | Warning | Social or browser action skill lacks explicit approval or no-submit boundary |
 | `tags-too-many` | Warning | More than 10 tags |
 
 ## Structure Checks
@@ -136,7 +137,7 @@ Overall: PASS
 | `secret-detected` | Error | Potential secret in tracked files |
 | `env-file-present` | Warning | .env file present |
 
-## Registry Checks (ClaweHub / HCS-26)
+## Registry Checks (ClawHub / HCS-26)
 
 | Check | Level | Description |
 |-------|-------|-------------|

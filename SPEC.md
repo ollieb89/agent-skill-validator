@@ -12,7 +12,7 @@ The agent skill ecosystem is exploding (antigravity-awesome-skills: 26k★, awes
 3. **Dependency Check** — verify referenced tools, models, and external resources are reachable
 4. **Dry-Run Test** — invoke skill in sandbox mode, verify it produces valid output structure
 5. **Publish Readiness** — check all required files exist (SKILL.md, README, LICENSE, examples/)
-6. **Registry Compatibility** — validate against ClaweHub / HCS-26 registry publish requirements
+6. **Registry Compatibility** — validate against ClawHub / HCS-26 registry publish requirements
 7. **CI Report** — GitHub Actions job summary + PR comment with lint/test breakdown
 8. **Fail Modes** — configurable: fail on errors, warnings, or schema drift
 
@@ -39,7 +39,7 @@ The agent skill ecosystem is exploding (antigravity-awesome-skills: 26k★, awes
 - examples/ directory with at least one example
 - No secrets in tracked files (.env, API keys pattern scan)
 
-### Registry Checks (ClaweHub / HCS-26)
+### Registry Checks (ClawHub / HCS-26)
 - skill-id unique format: org/skill-name
 - category from allowed list
 - tags: minimum 3, maximum 10

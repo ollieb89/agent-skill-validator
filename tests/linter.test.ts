@@ -108,6 +108,12 @@ describe('lintSkillMd', () => {
     expect(result.warnings.some(w => w.rule === 'action-approval-boundary-missing')).toBe(true);
   });
 
+  it('warns when social action approval wording is negated', () => {
+    const content = `---\nname: X Publisher\ndescription: Publish X posts without approval from the user.\nlocation: ./SKILL.md\nschema-version: 1.0\n---\n# X Publisher\n\nSend social posts without human approval.\n`;
+    const result = lintSkillMd(content);
+    expect(result.warnings.some(w => w.rule === 'action-approval-boundary-missing')).toBe(true);
+  });
+
   it('returns location in issue', () => {
     const result = lintSkillMd('# no frontmatter', '/path/SKILL.md');
     expect(result.issues[0].location).toBe('/path/SKILL.md');

@@ -9,6 +9,9 @@ const PLACEHOLDER_PATTERNS = [
 ];
 const SEMVER_RE = /^\d+\.\d+(\.\d+)?$/;
 const NAME_VALID_RE = /^[a-zA-Z0-9][a-zA-Z0-9 _\-.:()]+$/;
+const SOCIAL_ACTION_RE = /\b(browser|dm|follow|like|message|post|publish|quote|reply|repost|schedule|send|social|tweet|unfollow|x\.com)\b/i;
+const APPROVAL_BOUNDARY_RE = /\b(approval|approve|confirm|confirmation|draft-only|human review|manual review|never publish|never submit|preview-only|stop before|user review|without publishing|without submitting)\b/i;
+const NEGATED_APPROVAL_BOUNDARY_RE = /\b(without|no|never|do not|don't|cannot|can't|skip|bypass)\s+(?:user\s+|human\s+|manual\s+|explicit\s+)?(approval|approve|confirmation|confirm|review|consent|permission)\b/i;
 function lintSkillMd(content, filePath = 'SKILL.md') {
     const issues = [];
     const addIssue = (level, rule, message) => {
@@ -87,6 +90,11 @@ function lintSkillMd(content, filePath = 'SKILL.md') {
     const body = content.replace(/^---[\s\S]*?---\r?\n/, '');
     if (PLACEHOLDER_PATTERNS.some(p => p.test(body))) {
         addIssue('warning', 'body-placeholder', 'SKILL.md body appears to contain placeholder text (TODO/FIXME/TBD)');
+    }
+    const actionText = [description, body].filter(Boolean).join('\n');
+    if (SOCIAL_ACTION_RE.test(actionText)
+        && (!APPROVAL_BOUNDARY_RE.test(actionText) || NEGATED_APPROVAL_BOUNDARY_RE.test(actionText))) {
+        addIssue('warning', 'action-approval-boundary-missing', 'Skill appears to drive social or browser actions but does not mention an explicit approval or no-submit boundary');
     }
     // Check for broken-looking local links
     const links = (0, detector_1.extractBodyLinks)(content);

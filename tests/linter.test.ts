@@ -102,6 +102,12 @@ describe('lintSkillMd', () => {
     expect(result.infos.some(i => i.rule === 'local-link')).toBe(true);
   });
 
+  it('warns when social action skills do not include an approval boundary', () => {
+    const content = `---\nname: X Reply Writer\ndescription: Draft and publish X replies from browser context for a social account.\nlocation: ./SKILL.md\nschema-version: 1.0\n---\n# X Reply Writer\n\nUse browser context to write replies on x.com.\n`;
+    const result = lintSkillMd(content);
+    expect(result.warnings.some(w => w.rule === 'action-approval-boundary-missing')).toBe(true);
+  });
+
   it('returns location in issue', () => {
     const result = lintSkillMd('# no frontmatter', '/path/SKILL.md');
     expect(result.issues[0].location).toBe('/path/SKILL.md');
